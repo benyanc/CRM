@@ -1,0 +1,52 @@
+﻿@model List<OrderViewModel>
+
+@{
+    ViewBag.Title = "ViewUserOrders";
+}
+
+<h2>ViewUserOrders</h2>
+
+
+@*<table>
+        <tr>
+            <td>用户名</td>
+            <td>项目编号</td>
+            <td>订单类型</td>
+            <td>提交日期</td>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            OrderViewModel order = Model[i];
+            if (order != null)
+            {
+                <tr class="order_row_@(i)">
+                    <td>@order.UserName</td>
+                    <td>@order.ProjectId</td>
+                    @if (order.OrderType == OrderTypeEnum.SequencingContract)
+                    {
+                        <td>测序外包</td>
+                    }
+                    else
+                    {
+                        <td>未知订单类型</td>
+                    }
+                    <td>@order.OrderSubmissionDate.Date.ToString("d", new CultureInfo("zh-CN"))</td>
+                    <td>@Ajax.ActionLink(
+                        "查看订单",                         // linkText
+                        "GetOrderDetailsPartialView",       // actionName
+                        "Orders",                           // controllerName
+                        (SequencingContractViewModel)order, // routeValues
+                        new AjaxOptions { UpdateTargetId = "orderDetailsPartial" }  // htmlAttributes
+                    )
+                    </td>
+                </tr>
+            }
+        }
+    </table>*@
+<div class="panel-group" id="accordion">
+    @Html.DisplayForModel()
+</div>
+
+<div id="orderDetailsPartial"></div>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>

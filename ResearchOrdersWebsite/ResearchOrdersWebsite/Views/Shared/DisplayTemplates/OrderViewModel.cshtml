@@ -1,0 +1,17 @@
+﻿@model OrderViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_@(Model.ProjectId)">
+                项目编号: @Model.ProjectId
+            </a>
+        </h4>
+        <div>用户名: @Model.UserName</div>
+        <div>订单类型: @Model.OrderType</div>
+        <div>提交日期: @Model.OrderSubmissionDate.ToShortDateString()</div>
+    </div>
+    <div id="collapse_@(Model.ProjectId)" class="panel-collapse collapse in">
+        @Html.Partial("_OrderDetailsPartial", Model)
+    </div>
+</div>

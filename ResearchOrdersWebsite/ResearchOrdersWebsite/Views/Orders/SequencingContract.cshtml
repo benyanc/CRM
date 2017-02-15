@@ -1,0 +1,268 @@
+﻿@using ResearchOrdersWebsite.Models
+@model SequencingContractViewModel
+
+@{
+    ViewBag.Title = "SequencingContract";
+}
+
+<h2>高通量测序</h2>
+<h3>测序外包</h3>
+
+@using (Html.BeginForm("SequencingContract", "Orders", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Organization, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.Organization, new { @class = "form-control", @Value = (string)Session["Organization"] })
+            @Html.ValidationMessageFor(m => m.Organization, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProjectId, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.ProjectId, new { @class = "form-control", @Value = (string)Session["ProjectId"] })
+            @Html.ValidationMessageFor(m => m.ProjectId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrderComments, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextAreaFor(m => m.OrderComments, new { @class = "form-control", @Value = (string)Session["OrderComments"] })
+            @Html.ValidationMessageFor(m => m.OrderComments, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProjectType, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td class="td-top">
+                        @Html.RadioButtonFor(m => m.ProjectType, ProjectTypeEnum.ByLane, Session["ProjectType"]==null ? null:((ProjectTypeEnum)Session["ProjectType"]) == ProjectTypeEnum.ByLane ? new { @checked = "checked" } : null ) 包 lane
+                    </td>
+                    <td class="td-top">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.NumLanes, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.NumLanes, new { @class = "form-control", @Value = (string)Session["NumLanes"] })
+                                @Html.ValidationMessageFor(m => m.NumLanes, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-top">
+                        @Html.RadioButtonFor(m => m.ProjectType, ProjectTypeEnum.SelfDefined, Session["ProjectType"] == null ? null : ((ProjectTypeEnum)Session["ProjectType"]) == ProjectTypeEnum.SelfDefined ? new { @checked = "checked" } : null ) 项目自定义
+                    </td>
+                    <td class="td-top">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ProjectTypeSelfDefinition, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(m => m.ProjectTypeSelfDefinition, new { @class = "form-control", @Value = (string)Session["ProjectTypeSelfDefinition"] })
+                                @Html.ValidationMessageFor(m => m.ProjectTypeSelfDefinition, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            @Html.ValidationMessageFor(m => m.ProjectType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SampleGenus, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.SampleGenus, new { @class = "form-control", @Value = (string)Session["SampleGenus"] })
+            @Html.ValidationMessageFor(m => m.SampleGenus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SampleSpecies, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.SampleSpecies, new { @class = "form-control", @Value = (string)Session["SampleSpecies"] })
+            @Html.ValidationMessageFor(m => m.SampleSpecies, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.GeneSize, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.GeneSize, new { @class = "form-control", @Value = (string)Session["GeneSize"] })
+            @Html.ValidationMessageFor(m => m.GeneSize, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SplitData, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SplitData, true, Session["SplitData"] == null ? null : ((bool)Session["SplitData"])? new { @checked = "checked" }:null) 是
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.IndexDetails, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.IndexDetails, new { @class = "form-control", @Value = (string)Session["IndexDetails"] })
+                                @Html.ValidationMessageFor(m => m.IndexDetails, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SplitData, false, Session["SplitData"] == null ? null : (!(bool)Session["SplitData"])? new { @checked = "checked" }:null) 否
+                    </td>
+                </tr>
+            </table>
+            @Html.ValidationMessageFor(m => m.SplitData, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SampleType, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SampleType, SampleTypeEnum.MixLanesTrue, Session["SampleType"] == null ? null : ((SampleTypeEnum)Session["SampleType"]) == SampleTypeEnum.MixLanesTrue ? new { @checked = "checked" } : null) 以构建文库（需要世和混 lane）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SampleType, SampleTypeEnum.MixLanesFalse, Session["SampleType"] == null ? null : ((SampleTypeEnum)Session["SampleType"]) == SampleTypeEnum.MixLanesFalse ? new { @checked = "checked" } : null) 以构建文库（不需要世和混 lane）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SampleType, SampleTypeEnum.SelfDefined, Session["SampleType"] == null ? null : ((SampleTypeEnum)Session["SampleType"]) == SampleTypeEnum.SelfDefined ? new { @checked = "checked" } : null) 样本自定义
+                    </td>
+                </tr>
+            </table>
+            @Html.ValidationMessageFor(m => m.SampleType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.MixLaneSize, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.MixLaneSize, new { @class = "form-control", @Value= (string)Session["MixLaneSize"] })
+            @Html.ValidationMessageFor(m => m.MixLaneSize, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SampleTypeSelfDefinition, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.SampleTypeSelfDefinition, new { @class = "form-control", @Value= (string)Session["SampleTypeSelfDefinition"] })
+            @Html.ValidationMessageFor(m => m.SampleTypeSelfDefinition, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SequencingPlatform, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SequencingPlatform, SequencingPlatformEnum.HiSeq4000, Session["SequencingPlatform"] == null ? null : ((SequencingPlatformEnum)Session["SequencingPlatform"]) == SequencingPlatformEnum.HiSeq4000 ? new { @checked = "checked" } : null) HiSeq4000
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SequencingPlatform, SequencingPlatformEnum.HiSeqXTen, Session["SequencingPlatform"] == null ? null : ((SequencingPlatformEnum)Session["SequencingPlatform"]) == SequencingPlatformEnum.HiSeqXTen ? new { @checked = "checked" } : null) HiSeqXTen
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SequencingPlatform, SequencingPlatformEnum.MiSeq, Session["SequencingPlatform"] == null ? null : ((SequencingPlatformEnum)Session["SequencingPlatform"]) == SequencingPlatformEnum.MiSeq ? new { @checked = "checked" } : null) MiSeq
+                    </td>
+                </tr>
+            </table>
+            @Html.ValidationMessageFor(m => m.SequencingPlatform, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CustomerProvidesHardDrive, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.CustomerProvidesHardDrive, true, Session["CustomerProvidesHardDrive"] == null ? null : (bool)Session["CustomerProvidesHardDrive"]? new { @checked = "checked" }:null) 是
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.CustomerProvidesHardDrive, false, Session["CustomerProvidesHardDrive"] == null ? null : !(bool)Session["CustomerProvidesHardDrive"]? new { @checked = "checked" }:null) 否
+                    </td>
+                </tr>
+            </table>
+            @Html.ValidationMessageFor(m => m.CustomerProvidesHardDrive, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SampleAlreadyAtGeneseeq, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SampleAlreadyAtGeneseeq, true, Session["SampleAlreadyAtGeneseeq"] == null ? null : (bool)Session["SampleAlreadyAtGeneseeq"] ? new { @checked = "checked" }:null) 是
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SampleAlreadyAtGeneseeq, false, Session["SampleAlreadyAtGeneseeq"] == null ? null : !(bool)Session["SampleAlreadyAtGeneseeq"] ? new { @checked = "checked" } : null) 否
+                    </td>
+                </tr>
+            </table>
+            @Html.ValidationMessageFor(m => m.SampleAlreadyAtGeneseeq, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.GeneseeqSampleId, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.GeneseeqSampleId, new { @class = "form-control", @Value= (string)Session["GeneseeqSampleId"] })
+            @Html.ValidationMessageFor(m => m.GeneseeqSampleId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DeliveryNumber, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.DeliveryNumber, new { @class = "form-control", @Value= (string)Session["DeliveryNumber"] })
+            @Html.ValidationMessageFor(m => m.DeliveryNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div align="center">
+        @Html.ActionLink("下载空白文库信息单", "DownloadBlankDataInfoFile");
+    </div>
+    <div align="center">
+        @Html.Label("上传文件（最大4MB）")
+    </div>
+    <div align="center">
+        <input type="file" name="DataInfoFile" />
+        @Html.ValidationMessageFor(m => m.DataInfoFileName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group" align="center">
+        <div class="col-md-2">
+        </div>
+        <div align="right">
+            <input type="submit" class="btn btn-default" value="下一步" />
+        </div>
+    </div>
+
+}

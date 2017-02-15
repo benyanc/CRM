@@ -1,0 +1,17 @@
+﻿@using ResearchOrdersWebsite.Models
+@model OrderViewModel
+
+@{
+    ViewBag.Title = "ConfirmOrder";
+}
+
+<h2>确认订单信息</h2>
+
+@Html.Partial("_OrderDetailsPartial", Model)
+<p>
+    @Html.ActionLink("更改订单", "SequencingContract", "Orders")
+</p>
+
+<p>
+    @Html.ActionLink("提交订单", "SubmitOrder", "Orders")
+</p>

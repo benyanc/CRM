@@ -1,0 +1,150 @@
+﻿@using ResearchOrdersWebsite.Models
+@model OrderViewModel
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+@{
+    if (Model.OrderType == OrderTypeEnum.SequencingContract)
+    {
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).Organization)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).Organization)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).OrderComments)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).OrderComments)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).NumLanes)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).NumLanes)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).ProjectTypeSelfDefinition)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).ProjectTypeSelfDefinition)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).SampleGenus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).SampleGenus)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).SampleSpecies)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).SampleSpecies)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).GeneSize)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).GeneSize)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).SplitData)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).SplitData)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).IndexDetails)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).IndexDetails)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).MixLaneSize)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).MixLaneSize)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).SampleTypeSelfDefinition)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).SampleTypeSelfDefinition)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).CustomerProvidesHardDrive)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).CustomerProvidesHardDrive)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).SampleAlreadyAtGeneseeq)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).SampleAlreadyAtGeneseeq)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).GeneseeqSampleId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).GeneseeqSampleId)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).DeliveryNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).DeliveryNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => (model as SequencingContractViewModel).DataInfoFileName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => (model as SequencingContractViewModel).DataInfoFileName)
+                </dd>
+
+            </dl>
+        </div>
+    }
+    else
+    {
+        <div class="panel-body">
+            订单类型有错误
+        </div>
+
+    }
+}
